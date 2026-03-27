@@ -20,6 +20,8 @@ def add(a, b):
 
 import unittest
 
+from numpy import subtract
+
 
 ############################################################
 # 3. CREATE TEST CLASS
@@ -160,7 +162,119 @@ class TestMultiple(unittest.TestCase):
 
 
 ############################################################
-# END NOTE
+# END NOTE Unit TESTING
 ############################################################
 
 print("\n🎉 Unit Testing Learning Completed!")
+
+
+############################################################
+# PYTEST SINGLE FILE (BASIC → ADVANCED)
+# Everything in ONE file (functions + tests)
+############################################################
+
+############################################################
+# 1. FUNCTIONS TO TEST
+############################################################
+
+def addition(a, b):
+    return a + b
+
+def subtraction(a, b):
+    return a - b
+
+def is_even_(num):
+    return num % 2 == 0
+
+def division(a, b):
+    return a / b
+
+
+############################################################
+# 2. IMPORT PYTEST
+############################################################
+
+import pytest 
+
+
+############################################################
+# 3. SIMPLE TESTS
+############################################################
+
+def test_addition():
+    assert addition(2, 3) == 5
+
+def test_subtraction():
+    assert subtraction(5, 2) == 3
+
+
+############################################################
+# 4. BOOLEAN TEST
+############################################################
+
+def test_is_even_():
+    assert is_even_(4) == True
+    assert is_even_(5) == False
+
+
+############################################################
+# 5. EXCEPTION TEST
+############################################################
+
+def test_division_by_zero():
+    with pytest.raises(ZeroDivisionError):
+        division(10, 0)
+
+
+############################################################
+# 6. PARAMETERIZED TEST (VERY IMPORTANT)
+############################################################
+
+@pytest.mark.parametrize("a,b,result", [
+    (2, 3, 5),
+    (1, 1, 2),
+    (0, 5, 5)
+])
+def test_add_multiple(a, b, result):
+    assert addition(a, b) == result
+
+
+############################################################
+# 7. FIXTURE (SETUP DATA)
+############################################################
+
+@pytest.fixture
+def sample_data():
+    return {"a": 10, "b": 5}
+
+
+def test_fixture(sample_data):
+    assert addition(sample_data["a"], sample_data["b"]) == 15
+
+
+############################################################
+# 8. SKIP TEST
+############################################################
+
+@pytest.mark.skip(reason="Skipping example")
+def test_skip():
+    assert True
+
+
+############################################################
+# 9. MARK TEST (ADVANCED)
+############################################################
+
+@pytest.mark.slow
+def test_slow():
+    assert addition(100, 200) == 300
+
+
+############################################################
+# END NOTE Pytest
+############################################################
+
+# Run using:
+# pytest -v unit-Testing&Pytest.py
+
+print("\n🎉 Pytest Single File Ready!")
