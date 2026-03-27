@@ -18,7 +18,7 @@ for i in range(5):                                                 #6.these is e
 
 
 #Example_1.2:creating thread by extending thraed class
-from threading import *                                                                                      #1.executed by main thread 
+from threading import Thread                                                                                      #1.executed by main thread 
 class MyThread(Thread):                                                                                      #2.ignored by main thread/#5.executed by child thread 
     def run(self):#here 'run()' is thread class method [used to define a thread's activity and can be overridden by a class that extends the threads class.]
        print("child thread")
@@ -33,7 +33,7 @@ for i in range(10):                                                             
 
 
 #Example_1.3:creating thread by without extending thraed class
-from threading import *                   #1.executed by main thread 
+from threading import *  #type: ignore                 #1.executed by main thread 
 class Test:                               #2.ignored by main thread/6.executed by child thread 
     def m1(self):
         for i in range(10):
@@ -56,7 +56,7 @@ for i in range(10):                       #7.executed by main thread
 #Example_1
 import time  
 import threading  
-from threading import *  
+from threading import *  #type: ignore
 def cal_sqre(num): # define a square calculating function  
  print(" Calculate the square root of the given number")  
  for n in num: # Use for loop   

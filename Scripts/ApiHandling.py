@@ -134,30 +134,30 @@ This program demonstrates real-time API handling in Python with practical usage 
 
 
 
-from ast import main
 import requests
 
 def fetch_random_user_freeapi():
     url = "https://api.freeapi.app/api/v1/public/randomusers/user/random"
-    response = requests.get(url)
-    print(response)
-    data=response.json()
+    response = requests.get(url, timeout=10)
+    response.raise_for_status()
+    data = response.json()
     if data["success"] and "data" in data:
-            userdata= data["data"]
-            username=userdata["login"]["username"]
-            country=userdata["location"]["country"]
-            return username,country
-    else:
-            raise Exception("Failed to fetch data")
-        
-    
-    def main():
-        try:
-            username, country = fetch_random_user_freeapi()
-            print(f"Username: {username}")
-            print(f"Country: {country}")
-        except Exception as e:
-            print(f"Error: {e}")
+        userdata = data["data"]
+        username = userdata["login"]["username"]
+        country = userdata["location"]["country"]
+        return username, country
+    raise Exception("Failed to fetch data")
+
+
+def main():
+    try:
+        username, country = fetch_random_user_freeapi()
+        print(f"Username: {username}")
+        print(f"Country: {country}")
+    except requests.exceptions.RequestException as exc:
+        print(f"Network error: {exc}")
+    except Exception as exc:
+        print(f"Error: {exc}")
 
 
 if __name__ == "__main__":

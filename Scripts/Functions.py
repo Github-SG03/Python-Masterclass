@@ -3,12 +3,12 @@
 
 #Example1 of a User-Defined Function
 #We will define a function that when called will return the square of the number passed to it as an argument.
-def square( num ):  #function definition
+def square_number( num ):  #function definition
     """ 
     This function computes the square of the number. 
     """  
     return num**2 
-object_ = square(9) #function call 
+object_ = square_number(9) #function call 
 print( "The square of the number is: ", object_ )
 
 
@@ -33,14 +33,14 @@ print( "Length of the string python_tutorial is: ", a_function( "python_tutorial
 
 #way to call function
 #Caliing a function by 'Pass by Reference VS Pass by Value'
-def square( my_list ): #defining the function 
+def square_list_items( my_list ): #defining the function 
     '''''This function will find the square of items in list'''  
     squares = []  
     for l in my_list:  
       squares.append( l**2 )  
-      return squares  
+    return squares  
 list_ = [45, 52, 13] 
-result = square( list_ )  # calling the defined function by 'Pass by Reference'
+result = square_list_items( list_ )  # calling the defined function by 'Pass by Reference'
 print( "Squares of the list is: ", result ) 
 
 ##################################################################################################################################################
@@ -48,43 +48,39 @@ print( "Squares of the list is: ", result )
 
 ##Function Arguments(calling a function through Pass by Value)
 #1.Default Arguments(takes default value when no value is defined in function call)
-def function( num1, num2 = 40 ):  
+def function_default_args( num1, num2 = 40 ):  
    print("num1 is: ", num1)  
    print("num2 is: ", num2)  
-print( "Passing one argument",function(10))# Calling the function and passing only one argument    
-print( "Passing two arguments",function(10,30)) # Now giving two arguments to the function
+print( "Passing one argument",function_default_args(10))# Calling the function and passing only one argument    
+print( "Passing two arguments",function_default_args(10,30)) # Now giving two arguments to the function
 #2.Keyword Arguments()
-def function( num1, num2 ):  
+def function_keyword_args( num1, num2 ):  
    print("num1 is: ", num1)  
    print("num2 is: ", num2)  
-print( "Without using keyword",function( 50, 30)  )  # Calling function and passing arguments without using keyword  
-print( "With using keyword",function( num2 = 50, num1 = 30))# Calling function and passing arguments using keyword  
+print( "Without using keyword",function_keyword_args( 50, 30)  )  # Calling function and passing arguments without using keyword  
+print( "With using keyword",function_keyword_args( num2 = 50, num1 = 30))# Calling function and passing arguments using keyword  
 #3Variable-Length Arguments(We can use special characters in python_tutorial functions to pass as many arguments as we want in a function. There are two types of characters that we can use for this purpose:1.*args,2.**Kwargs)
 #3.1*args(non-keyword arguments)
-def function( *args_list ):  
+def function_with_args( *args_list ):  
    ans = []  
    for l in args_list:  
        ans.append( l.upper() ) 
    return ans  
-object = function('python_tutorial', 'Functions', 'tutorial')# Passing args arguments   
+object = function_with_args('python_tutorial', 'Functions', 'tutorial')# Passing args arguments   
 print( object )  
 #3.2**kwargs(keywords arguments)
-def function( **kargs_list ):  
+def function_with_kwargs( **kargs_list ):  
     ans = []  
     for key, value in kargs_list.items(): 
         ans.extend([key, value])  
     return ans  
-object = function(First = "python_tutorial", Second = "Functions", Third = "Tutorial") # Paasing kwargs arguments  
+object = function_with_kwargs(First = "python_tutorial", Second = "Functions", Third = "Tutorial") # Paasing kwargs arguments  
 print(object) 
 #4Required Arguments()
-def function( num1, num2 ): 
+def function_required_args( num1, num2 ): 
     print("num1 is: ", num1) 
     print("num2 is: ", num2)  
-print( "Passing out of order arguments" ,function( 30, 20 ) )  # Calling function and passing two arguments out of order, we need num1 to be 20 and num2 to be 30  
-try:
-   print( "Passing only one argument",function( 30 ) )  # Calling function and passing only one argument   
-except:  
-  print( "Function needs two positional arguments" )  
+print( "Passing positional arguments" ,function_required_args( 30, 20 ) )  # Calling function and passing two required arguments  
   
   
   
@@ -92,13 +88,13 @@ except:
  
 ##function returning value or not returning ay value
 #returning any value  
-def square( num ):  
+def square_with_return( num ):  
  return num**2     
-print( "With return statement:",square( 39 ) ) # Calling function and passing arguments. 
+print( "With return statement:",square_with_return( 39 ) ) # Calling function and passing arguments. 
 #not returning any value  
-def square( num ):  
- num**2   
-print( "Without return statement:",square( 39 ) )# Calling function and passing arguments.
+def square_without_return( num ):  
+ return   
+print( "Without return statement:",square_without_return( 39 ) )# Calling function and passing arguments.
 
 
 
@@ -150,8 +146,8 @@ print( cube_list )
 l1=[1,2,3,4,5]
 squares_list = [lambda num = num: num ** 2 for num in l1 if num !=2]
 print("squared_list:",squares_list)
-for square in squares_list:  
-  print( square(), end = " ")
+for square_func in squares_list:  
+  print( square_func(), end = " ")
   
   
 #transpose of matrix using list comprehension
@@ -228,16 +224,16 @@ new=hello() #assigning hi(return value of hello() to new now: new=hi
 new() #calling hi()
 
 #Decorator example_1
-def add(x):  
+def add_one(x):  
  return x+1  
-def sub(x):  
+def sub_one(x):  
  return x-1  
 def operator(func, x):  #here 'operetor()' is generator which modify the behaviour of add()/sub() since it is passed as an argumen
  print("func:",func.__name__)
  temp = func(x)      #retuning x+1/x-1 as return value to 'temp'
  return temp  
-print(operator(sub,10))  
-print(operator(add,20))
+print(operator(sub_one,10))  
+print(operator(add_one,20))
  
 
 #Decorator example_2
@@ -245,19 +241,19 @@ print(operator(add,20))
 from Debugly import debug
 
 @debug                      #here each function is decorated but hides implementation detail
-def add(x,y): 
+def add_values(x,y): 
   return x+y
 
 @debug
-def sub(x,y):
+def sub_values(x,y):
   return x-y
 
 @debug
-def mul(x,y):
+def mul_values(x,y):
   return x*y
 
 @debug
-def div(x,y):
+def div_values(x,y):
   return x/y
 
 
@@ -275,8 +271,11 @@ def subtract(x, y):
   
 """
 #importing module calc.py
-import PYTHON.python_tutorial.Module as Module#importing module 'calc.py'
-print(Module.add(10, 2))
+try:
+    from Module import add as module_add
+    print(module_add(10, 2))
+except Exception as exc:
+    print(f"Skipping local module example: {exc}")
 
 
 #Importing specific attributes from the module
@@ -305,18 +304,24 @@ print(mt.factorial(6))
 
 #Example1
 #Import Module from package
-from python_tutorial import mod_1
-from python_tutorial import mod_2
-mod_1.gfg()
-res = mod_2.sum(1, 2)
-print(res)
+try:
+    from Mod_1 import gfg
+    from Mod_2 import sum as mod_sum
+    gfg()
+    res = mod_sum(1, 2)
+    print(res)
+except Exception as exc:
+    print(f"Skipping package import example: {exc}")
 #Example2
 #Import Specific function from the module
-from python_tutorial.mod_1 import gfg
-from python_tutorial.mod_2 import sum
-gfg()
-res = sum(1, 2)
-print(res)
+try:
+    from Mod_1 import gfg
+    from Mod_2 import sum as mod_sum
+    gfg()
+    res = mod_sum(1, 2)
+    print(res)
+except Exception as exc:
+    print(f"Skipping specific import example: {exc}")
 
 
 

@@ -1,4 +1,18 @@
 ############################List in python#########################################################
+def _read_int(prompt, default=0):
+    try:
+        return int(input(prompt))
+    except EOFError:
+        return default
+    except ValueError:
+        return default
+
+def _read_text(prompt, default=""):
+    try:
+        return input(prompt)
+    except EOFError:
+        return default
+
 #simple list snippet
 l1 = ["John", 102, "USA"]    
 print(l1) 
@@ -80,11 +94,11 @@ for i in l1:
 #Declaring the empty list  
 l =[]  
 #Number of elements will be entered by the user    
-n = int(input("Enter the number of elements in the list:"))  
+n = _read_int("Enter the number of elements in the list:")  
 # for loop to take the input  
 for i in range(0,n):     
     # The input is taken from the user and added to the list as the item  
-    l.append(input("Enter the item:"))     
+    l.append(_read_text("Enter the item:"))     
 print("printing the list items..")   
 # traversal loop to print the list items    
 for i in l:   

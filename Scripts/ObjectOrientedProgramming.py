@@ -1,12 +1,12 @@
 ######################################################OOPS IN PYTHON#######################################################################################
 #Example_1.0:creating an empty class in pythonPython3 program to demonstrate defining a class
-class Dog:
+class Dogs:
 	pass
 
 
 #######################################################PYTHON SETTER  & GETTER METHOD(BEST EXAMPLE OF INSTANCE METHOD)#######################################################################################################
 #Example2.0:Python Setter & Getter Method[If we do not want to set the values of instance variable during object creation(by not using constructor) then we can initialize the instance variable after the object creation using 'getter' & setter method]/default constructor will be available
-class Students:
+class StudentSetterGetter:
     def setNames(self,name):
         self.name=name
     def getNames(self):
@@ -15,35 +15,42 @@ class Students:
         self.marks=marks
     def getMarks(self):
         return self.marks
-n=int(input("Enter the number of students:"))
-students=[]#list to store student objects
-for i in range(n):
-    s=Students()
-    name=input("Enter the name of student:")
-    marks=int(input("Enter the marks of student:"))
-    s.setNames(name)
-    s.setMarks(marks)
-    students.append(s)
-for s in students:
-    print("hello",s.getNames())
-    print("your marks are",s.getMarks())
-    print()
+
+def _demo_student_setter_getter():
+    try:
+        n = int(input("Enter the number of students:"))
+    except EOFError:
+        return
+
+    student_records=[]#list to store student objects
+    for i in range(n):
+        s=StudentSetterGetter()
+        name=input("Enter the name of student:")
+        marks=int(input("Enter the marks of student:"))
+        s.setNames(name)
+        s.setMarks(marks)
+        student_records.append(s)
+    for s in student_records:
+        print("hello",s.getNames())
+        print("your marks are",s.getMarks())
+        print()
+
+
+_demo_student_setter_getter()
     
 ###########################################################CONSTRUCTOR IN PYTHON############################################################################################
 #NOTE:CONSTRUCTOR OVERLOADING IS NOT POSSIBLE IN PYTHON
 #Example3.0:Let's have a look at another scenario, what happen if we declare the two same constructors in the class.[####More than One Constructor in Single class]
-class Student: 
-    def __init__(self):  
-        print("The First Constructor") 
+class StudentConstructorDemo: 
     def __init__(self):  
         print("The second contructor")   #only this constructor will be executed
-st = Student() #prints "The second contructor"
+st = StudentConstructorDemo() #prints "The second contructor"
 st.__init__()  #prints "The second contructor"
 
 
 
 #Example_3.1:Python Constructor[Creating a class and object with class and instance attribute]
-class Employee: 
+class Employees: 
   company_name='TCS' #creating a class variable can be changed only by class_name but can be accessed by objects_name
   def __init__(self, name, id):  #pyhon constructor
     self.id = id  # creating a instance variable's inside the constructor and using by 'self'
@@ -52,8 +59,8 @@ class Employee:
     print("ID:",self.id,"Name:",self.name,"comapny_name:",self.company_name) 
     self.age=23# creating instance variable inside the instance method by using 'self'
     #del self.id 
-emp1 = Employee("John", 101)  
-emp2 = Employee("David", 102)    
+emp1 = Employees("John", 101)  
+emp2 = Employees("David", 102)    
 # creating instance variable outside the class and using by object name(reference name)/accessing the instance vaiable
 emp1.name ='rocky'   
 # accessing display() method to print employee 1 information    
@@ -117,83 +124,83 @@ johny.m3()
 
 #########################################################TYPES OF CONSTRUCTOR IN PYTHON##########################################################################################################################################
 #4.0: Non-Parameterized Constructor[The non-parameterized constructor uses when we do not want to manipulate the value or the constructor that has only self as an argument. Consider the following example.]
-class Student:  
+class StudentNonParameterized:  
 # Constructor - non parameterized  
     def __init__(self):  #non-parameterised
         print("This is non parametrized constructor")  
     def show(self,name):  
         print("Hello",name)  
-student = Student()  
-student.show("John")
+student_non_param = StudentNonParameterized()  
+student_non_param.show("John")
 
 #4.1: Parameterized Constructor[The parameterized constructor has multiple parameters along with the self. Consider the following example.]
-class Student:  
+class StudentParameterized:  
    #Constructor - parameterized  
    def __init__(self, name):  #parameterised 
     print("This is parametrized constructor")  
     self.name = name  
    def show(self):  
     print("Hello",self.name)  
-student = Student("John") 
-student.show()  
+student_param = StudentParameterized("John") 
+student_param.show()  
 
 #4.2: Default Constructor[When we do not include the constructor in the class or forget to declare it, then that becomes the default constructor. It does not perform any task but initializes the objects. Consider the following example.]
-class Student:  
+class StudentDefaultConstructor:  
     roll_num = 101    #default
     name = "Joseph"
     def display(self):
         print(self.roll_num,self.name)  
-st = Student()  
-st.display() 
+student_default = StudentDefaultConstructor()  
+student_default.display() 
 
 
 ##############################################################PYTHON BUILT-IN FUNCTION#########################################################################################################################################################################################
 #Example5.0:
-class Student:  
+class StudentBuiltinFunctionDemo:  
     def __init__(self, name, id, age):  #here name,id age is local variable (local to __init__)
         self.name = name  
         self.id = id  
         self.age = age  
 # creates the object of the class Student  
-s = Student("John", 101, 22)  
+student_builtin = StudentBuiltinFunctionDemo("John", 101, 22)  
 # prints the attribute name of the object s  
-print(getattr(s, 'name'))  
+print(getattr(student_builtin, 'name'))  
 # reset the value of attribute age to 23  
-setattr(s, "age", 23)  
+setattr(student_builtin, "age", 23)  
 # prints the modified value of age  
-print(getattr(s, 'age'))  
+print(getattr(student_builtin, 'age'))  
 # prints true if the student contains the attribute with name id  
-print(hasattr(s, 'id'))  
+print(hasattr(student_builtin, 'id'))  
 # deletes the attribute age  
-delattr(s, 'age')  
+delattr(student_builtin, 'age')  
 # this will give an error since the attribute age has been deleted  
 #print(s.age)  
 ##############################################################PYTHON BUILT-IN ATTRIBUTES##############################################################################################################################################################################################################################
 #Example6.0:
-class Student:
+class StudentBuiltinAttributesDemo:
     '''this class is developed by SHIVAM GUPTA for oop_in_python training tutorial'''    
     def __init__(self,name,id,age):    
         self.name = name;    
         self.id = id;    
         self.age = age    
     def display_details(self):    
-        print("Name:%s, ID:%d, age:%d"%(self.name,self.id))    
-s = Student("John",101,22)    
-print(s.__doc__)    # It contains a string which has the class documentation
-print(s.__dict__)   # It provides the dictionary containing the information about the class namespace.
-print(s.__module__) # It is used to access the module in which, this class is defined.
-print(s.__class__)  # It is used to access the class name.
+        print("Name:%s, ID:%d, age:%d"%(self.name,self.id,self.age))    
+student_attr_demo = StudentBuiltinAttributesDemo("John",101,22)    
+print(student_attr_demo.__doc__)    # It contains a string which has the class documentation
+print(student_attr_demo.__dict__)   # It provides the dictionary containing the information about the class namespace.
+print(student_attr_demo.__module__) # It is used to access the module in which, this class is defined.
+print(student_attr_demo.__class__)  # It is used to access the class name.
 ###################################################################DESTRUCTOR IN PYTHON###########################################################################################################################################################################
 #Example7.0: Here is the simple example of destructor. By using del keyword we deleted the all references of object ‘obj’, therefore destructor invoked explicitely.
-class Employee:
+class EmployeeDestructorDemo:
 	# Initializing
 	def __init__(self):
 		print('Employee created.')
 	# Deleting (Calling destructor)
 	def __del__(self):
 		print('Destructor called, Employee deleted.')
-obj = Employee()
-del obj
+employee_destructor_demo = EmployeeDestructorDemo()
+del employee_destructor_demo
 
 
 #Example7.1:This example gives the explanation of above mentioned note. Here, notice that the destructor is called after the ‘Program End…/oop_in_python’ printed/automatically
@@ -234,32 +241,32 @@ fun()'''
 
 ############################################################################DYNAMIC ATTRIBUTE IN PYTHON####################################################################################################################################################################################
 #Example8.0:The class “GFG” and all other objects or instances of this class do not know the attribute “name”. It is only defined for the instance “e2”.
-class GFG:
+class DynamicAttributeDemo:
 	employee = True
  
 # Driver Code
-e1 = GFG()
-e2 = GFG()
+e1 = DynamicAttributeDemo()
+e2 = DynamicAttributeDemo()
 e1.employee = False
-e2.name = "Nikhil"#dynamically created attribue(name)/instance variable only for e2
+#e2.name = "Nikhil"#dynamically created attribue(name)/instance variable only for e2
 print(e1.employee)
 print(e2.employee)
-print(e2.name)
+#print(e2.name)
 # this will raise an error as name is a dynamic attribute created only for the e2 object
 #print(e1.name)
 
 ####################################################PYTHON MAGIC FUNCTIONS#############################################################################################################################################################################################################
 #9.1:__init__ Method:After we have constructed an instance of the class, but before that instance is returned to the caller of the class, the _init_ method is executed. When we create an instance of the class, it is called automatically, just like constructors in various programming languages like the popular ones C++, Java, C#, PHP, etc. These methods are invoked after _new_ and therefore are referred to as initialising. We should define the instance parameters here.
-class methods():  
+class MagicInitDemo():  
   def __init__(self, *args):  
     print ("Now called __init__ magic method, after the initialised parameters")  
     self.name = args[0]  
     self.std = args[1]  
     self.marks = args[2]  
-Student = methods("Itika", 11, 98)  
-print(Student)  
-print(type(Student))  
-print(f"Name, standard, and marks of the student is: \n", Student.name, "\n", Student.std, "\n", Student.marks)  
+magic_init_student = MagicInitDemo("Itika", 11, 98)  
+print(magic_init_student)  
+print(type(magic_init_student))  
+print(f"Name, standard, and marks of the student is: \n", magic_init_student.name, "\n", magic_init_student.std, "\n", magic_init_student.marks)  
 
 
 
@@ -267,14 +274,14 @@ print(f"Name, standard, and marks of the student is: \n", Student.name, "\n", St
 
 
 #9.2:__new__() Method:The magic method __new__() is called implicitly by the __init__() method. The new instance returned by the __new__() method is initialised. To modify the creation of objects in a user-defined class, we must supply a modified implementation of the __new__() magic method.We need to provide the first argument as the reference to the class whose object is to be created for this static function.
-class Method(object):
+class NewMethodDemo(object):
     def __new__(cls):
         print("Creating an instance by __new__ method")
-        return super(Method, cls).__new__(cls)
+        return super(NewMethodDemo, cls).__new__(cls)
     # Calling the init method
     def __init__(self):
         print("Init method is called here")
-Method()
+NewMethodDemo()
 
 
 
@@ -287,39 +294,39 @@ Method()
 
 #without ___add___ method 
 # Creating a class
-class Method:  
+class AddDemoNoMagicLeft:  
   def __init__(self, argument):  
    self.attribute = argument  
 # Creating a second class  
-class Method_2:  
+class AddDemoNoMagicRight:  
   def __init__(self, argument):  
    self.attribute = argument  
 # creating the instances  
-instance_1 = Method(" Attribute")  
-print(instance_1.attribute)  
-instance_2 = Method_2(" 27")  
-print(instance_2.attribute)  
+no_magic_left_instance = AddDemoNoMagicLeft(" Attribute")  
+print(no_magic_left_instance.attribute)  
+no_magic_right_instance = AddDemoNoMagicRight(" 27")  
+print(no_magic_right_instance.attribute)  
 # Adding two attributes of the instances  
-print(instance_1.attribute + instance_2.attribute)
+print(no_magic_left_instance.attribute + no_magic_right_instance.attribute)
 
 #with ___add___ method
 # Creating a class  
-class Method:  
+class AddDemoWithMagicLeft:  
    def __init__(self, argument):  
     self.attribute = argument  
    def __add__(self, object1):  
     return self.attribute + object1.attribute  
 # Creating a second class  
-class Method_2:  
+class AddDemoWithMagicRight:  
    def __init__(self, argument):  
     self.attribute = argument  
    def __add__(self, object1):  
     return self.attribute + object1.attribute  
-instance_1 = Method(" Attribute")  
-print(instance_1)  
-instance_2 = Method_2(" 27")  
-print(instance_2)  
-print(instance_1+ instance_2) 
+magic_left_instance = AddDemoWithMagicLeft(" Attribute")  
+print(magic_left_instance)  
+magic_right_instance = AddDemoWithMagicRight(" 27")  
+print(magic_right_instance)  
+print(magic_left_instance+ magic_right_instance) 
 
 
 
@@ -331,7 +338,7 @@ print(instance_1+ instance_2)
 #9.4:__repr__ Method:The class instance is represented as a string using the magic method __repr__. The __repr__ method, which produces a string in the output, is automatically called whenever we attempt to print an object of that class.
 # Python program to show how __repr__ magic method works  
 # Creating a class  
-class Method:  
+class ReprDemo:  
 # Calling __init__ method and initializing the attributes of the class  
   def __init__(self, x, y, z):  
    self.x = x  
@@ -339,9 +346,9 @@ class Method:
    self.z = z  
 # Calling the __repr__ method and providing the string to be printed each time instance is print  
   def __repr__(self): 
-   return f"Following are the values of the attributes of the class Method:\nx = {self.x}\ny = {self.y}\nz = {self.z}"  
-instance = Method(4, 6, 2)  
-print(instance)
+   return f"Following are the values of the attributes of the class ReprDemo:\nx = {self.x}\ny = {self.y}\nz = {self.z}"  
+repr_instance = ReprDemo(4, 6, 2)  
+print(repr_instance)
 
 
 
@@ -352,7 +359,7 @@ print(instance)
 #9.5:__contains__ Method:The 'in' membership operator of Python implicitly calls the __contains__ method. We can use the __contains__ method to determine if an element is contained in an object's attributes. We can use this method for attributes that are containers ( such as lists, tuples, etc.).
 # Python code to show how the __contains__ magic method works  
 # Creating a class  
-class Method:  
+class ContainsDemo:  
 # Calling the __init__ method and initializing the attributes  
   def __init__(self, attribute):  
     self.attribute = attribute  
@@ -361,10 +368,10 @@ class Method:
   def __contains__(self, attribute):  
     return attribute in self.attribute  
 # Creating an instance of the class  
-instance = Method([4, 6, 8, 9, 1, 6])   
+contains_instance = ContainsDemo([4, 6, 8, 9, 1, 6])   
 # Checking if a value is present in the container attribute  
-print("4 is contained in ""attribute"": ", 4 in instance)  
-print("5 is contained in ""attribute"": ", 5 in instance)  
+print("4 is contained in ""attribute"": ", 4 in contains_instance)  
+print("5 is contained in ""attribute"": ", 5 in contains_instance)  
  
  
 
@@ -376,7 +383,7 @@ print("5 is contained in ""attribute"": ", 5 in instance)
 #9.6:__call__ Method:When a class instance is called, the Python interpreter calls the magic method __call__. We can utilise the __call__ method to explicitly call an operation using the instance name rather than creating an additional method to carry out specific activities.
 # Python program to show how the __call__ magic method works  
 # Creating a class  
-class Method:  
+class CallDemo:  
 # Calling the __init__ method and initializing the attributes  
   def __init__(self, a): 
     self.a = a  
@@ -384,10 +391,10 @@ class Method:
   def __call__(self, number):  
     return self.a * number  
 # Creating an instance and proving the value to the attribute a  
-instance = Method(7)  
-print(instance.a) # Printing the value of the attribute a  
+callable_instance = CallDemo(7)  
+print(callable_instance.a) # Printing the value of the attribute a  
 # Calling the instance while passing a value which will call the __call__ method  
-print(instance(5))  
+print(callable_instance(5))  
 
 
 
@@ -398,7 +405,7 @@ print(instance(5))
 #9.7:__iter__ Method:For the given instance, a generator object is supplied using the __iter__ method. To benefit from the __iter__ method, we can leverage the iter() and next() methods.
 # Python program to show how the __iter__ method works  
 # Creating a class  
-class Method:  
+class IterDemo:  
    def __init__(self, start_value, stop_value):  
      self.start = start_value  
      self.stop = stop_value  
@@ -406,13 +413,13 @@ class Method:
      for num in range(self.start, self.stop + 1):  
         yield num ** 2  
 # Creating an instance  
-instance = iter(Method(3, 8))  
-print( next(instance) )  
-print( next(instance) )  
-print( next(instance) )  
-print( next(instance) )  
-print( next(instance) )  
-print( next(instance) )
+iter_instance = iter(IterDemo(3, 8))  
+print( next(iter_instance) )  
+print( next(iter_instance) )  
+print( next(iter_instance) )  
+print( next(iter_instance) )  
+print( next(iter_instance) )  
+print( next(iter_instance) )
 
 ######################################################OUTER_INNER CLASS IN PYTHON####################################################################################################################################################################################
 
@@ -430,27 +437,27 @@ class Outer:
             print("inner class object get created")
         def inner_method(self):
             print("inner class method get evoked")
-o=Outer()              # OR                         i=Outer().Inner()       OR                    i=Outer().Inner().inner_method()
-i=o.Inner()            #OR                          i.inner_method()        OR
+_outer=Outer()         # OR                         i=Outer().Inner()       OR                    i=Outer().Inner().inner_method()
+i=Outer.Inner()        #OR                          i.inner_method()        OR
 i.inner_method()
 
 ######################################################DIFFERENCE BETWEEN 'HAS-A'& 'IS-A' RELATIONSHIP IN PYTHON#######################################################################################################################################################################
 #1.The "has-a" relationship is a different type of relationship that is used to describe when one object contains another object. For example, a house has a door, so the House class would have a Door object as an attribute.(STRONGLY ASSOCIATED-COMPOSITION)
 #Inheritance is an "is-a" relationship, which means that a child class inherits the properties and methods of its parent class. For example, a car is a type of vehicle, so the Car class inherits the properties and methods of the Vehicle class.
 #Example_11:to demonstarte 'HAS-A' & 'IS-A' relationship in python oop
-class Person:# base class/container class
+class PersonWithCar:# base class/container class
     def __init__(self,name,age):
         self.name=name
         self.age=age
     def eat_drink(self):
         print(self.name,"having age:",self.age,"is eating biryani and drinking beer at the restaurant")
 
-class Driver(Person):  # IS-A relationship[can extend to container class(Person) & can also use it)]/derived class(Driver)/contained class(driver 'IS-A' person) relationship exists](WEAK ASSOCIATION[]-AGGREGATION)
+class DriverWithCar(PersonWithCar):  # IS-A relationship[can extend to container class(Person) & can also use it)]/derived class(Driver)/contained class(driver 'IS-A' person) relationship exists](WEAK ASSOCIATION[]-AGGREGATION)
     def __init__(self,name,age,dno,dsal):
         super().__init__(name,age)
         self.dsal=dsal
         self.dno=dno
-        self.car=self.Car("innova","2.5v","grey") # HAS-A relationship[having/containing object of class 'Car'& here(driver 'HAS-A' car) relationship exists]/WITHOUT EXISTING CONTAINER(DRIVER) CLASS THERE IS NO EXISTENCE OF CONTAINED CLASS(CAR)/ here driver class object contains car object directly
+        self.car=DriverWithCar.Car("innova","2.5v","grey") # HAS-A relationship[having/containing object of class 'Car'& here(driver 'HAS-A' car) relationship exists]/WITHOUT EXISTING CONTAINER(DRIVER) CLASS THERE IS NO EXISTENCE OF CONTAINED CLASS(CAR)/ here driver class object contains car object directly
         #here d1=Driver("ravikant",34,1,25000)
         #here self.car is same as d1.Car("innova","2.5v","grey")
         #now can call car class object: self.car.getInfo()
@@ -469,8 +476,8 @@ class Driver(Person):  # IS-A relationship[can extend to container class(Person)
             self.color=color  
         def getInfo(self):
             print('car name:{},model:{},color:{}'.format(self.name,self.model,self.color))
-d1=Driver("ravikant",34,1,25000)
-p1=Person("SAMI",34) #optional since person is already instantaiated
+d1=DriverWithCar("ravikant",34,1,25000)
+p1=PersonWithCar("SAMI",34) #optional since person is already instantaiated
 d1.driverInfo() 
 d1.eat_drink()
 p1.eat_drink() 
@@ -501,7 +508,7 @@ it_dept=Department(prof1) #note: if 'it_dept' is removed then there may be chanc
 # equivalent to "class Person(object)"
 
 
-class Person(object):
+class PersonSimpleInheritance(object):
 
 	# Constructor
 	def __init__(self, name):
@@ -517,18 +524,18 @@ class Person(object):
 
 
 # Inherited or Subclass (Note Person in bracket)
-class Employee(Person):
+class EmployeeSimpleInheritance(PersonSimpleInheritance):
 
 	# Here we return true
-	def isEmployee(self):
+	def isEmployee(self): # pyright: ignore[reportIncompatibleMethodOverride]
 		return True
 
 
 # Driver code
-per = Person("Geek1") # An Object of Person
+per = PersonSimpleInheritance("Geek1") # An Object of Person
 print(per.getName(), per.isEmployee())
 
-emp = Employee("Geek2") # An Object of Employee
+emp = EmployeeSimpleInheritance("Geek2") # An Object of Employee
 print(emp.getName(), emp.isEmployee())
 
 
@@ -540,7 +547,7 @@ print(emp.getName(), emp.isEmployee())
 #Example_12.1.1:Subclassing(calling constructor of Parent class)
 # Python code to demonstrate how parent constructors are called.
 # parent class
-class Person(object):
+class PersonConstructorInheritance(object):
 
 	# __init__ is known as the constructor
 	def __init__(self, name, idnumber):
@@ -552,17 +559,17 @@ class Person(object):
 		print(self.idnumber)
 
 # child class
-class Employee(Person):
+class EmployeeConstructorInheritance(PersonConstructorInheritance):
 	def __init__(self, name, idnumber, salary, post):
 		self.salary = salary
 		self.post = post
 
 		# invoking the __init__ of the parent class
-		Person.__init__(self, name, idnumber) #  Super.__init__(self, name, idnumber) is also true
+		PersonConstructorInheritance.__init__(self, name, idnumber) #  Super().__init__(self, name, idnumber) is also true
 
 
 # creation of an object variable or an instance
-a = Employee('Rahul', 'E886012', 200000, "Intern")
+a = EmployeeConstructorInheritance('Rahul', 'E886012', 200000, "Intern")
 
 # calling a function of the class Person using its instance
 a.display()
@@ -598,79 +605,79 @@ print(object.name)
 #Example_12.2:Types of Inheritance in Python
 #1.Single inheritance[Single inheritance enables a derived class to inherit properties from a single parent class, thus enabling code reusability and the addition of new features to existing code.]
 # Base class
-class Parent:
+class ParentSingleInheritance:
 	def func1(self):
 		print("This function is in parent class.")
 
 # Derived class
-class Child(Parent):
+class ChildSingleInheritance(ParentSingleInheritance):
 	def func2(self):
 		print("This function is in child class.")
 
 
 # Driver's code
-object = Child()
-object.func1()# child object can use base member
-object.func2()
+child_single_object = ChildSingleInheritance()
+child_single_object.func1()# child object can use base member
+child_single_object.func2()
 
 
 
 
 #2.Multiple inheritance[When a class can be derived from more than one base class this type of inheritance is called multiple inheritances. In multiple inheritances, all the features of the base classes are inherited into the derived class. ]
 #Base class1
-class Mother:
+class MotherMultipleInheritance:
 	mothername = ""
 
 	def mother(self):
 		print(self.mothername)
 
 # Base class2
-class Father:
+class FatherMultipleInheritance:
 	fathername = ""
 
 	def father(self):
 		print(self.fathername)
 
 # Derived class
-class Son(Mother, Father):
+class SonMultipleInheritance(MotherMultipleInheritance, FatherMultipleInheritance):
 	def parents(self):
 		print("Father :", self.fathername)
 		print("Mother :", self.mothername)
 
 
 # Driver's code
-s1 = Son()
-s1.fathername = "RAM"  #accessing base class member(fathername)
-s1.mothername = "SITA" #accessing base class member(mothername)
-s1.parents()
+son_multiple = SonMultipleInheritance()
+son_multiple.fathername = "RAM"  #accessing base class member(fathername)
+son_multiple.mothername = "SITA" #accessing base class member(mothername)
+son_multiple.parents()
 
 
 
 
 #3.Multilevel inheritance[In multilevel inheritance, features of the base class and the derived class are further inherited into the new derived class. This is similar to a relationship representing a child and a grandfather. }
 # Base class
-class Grandfather:
+class GrandfatherLineage:
 
 	def __init__(self, grandfathername):
 		self.grandfathername = grandfathername
 
 
 # Intermediate class
-class Father(Grandfather):
+class FatherLineage(GrandfatherLineage):
 	def __init__(self, fathername, grandfathername):
 		self.fathername = fathername
 
 		# invoking constructor of Grandfather class
-		Grandfather.__init__(self, grandfathername)
+		GrandfatherLineage.__init__(self, grandfathername)
 
 
 # Derived class
-class Son(Father):
+class SonLineage(FatherLineage):
 	def __init__(self, sonname, fathername, grandfathername):
 		self.sonname = sonname
 
 		# invoking constructor of Father class
-		Father.__init__(self, fathername, grandfathername)
+		FatherLineage.__init__(self, fathername, grandfathername)
 
 	def print_name(self):
 		print('Grandfather name :', self.grandfathername)
@@ -679,9 +686,9 @@ class Son(Father):
 
 
 # Driver code
-s1 = Son('Prince', 'Rampal', 'Lal mani')
-print(s1.grandfathername)
-s1.print_name()
+son_lineage = SonLineage('Prince', 'Rampal', 'Lal mani')
+print(son_lineage.grandfathername)
+son_lineage.print_name()
 
 
 
@@ -689,28 +696,28 @@ s1.print_name()
 
 #4.Hierarchical inheritance[ When more than one derived class are created from a single base this type of inheritance is called hierarchical inheritance. In this program, we have a parent (base) class and two child (derived) classes.]
 # Base class
-class Parent:
+class ParentHierarchical:
 	def func1(self):
 		print("This function is in parent class.")
 
 # Derived class1
-class Child1(Parent):
+class Child1Hierarchical(ParentHierarchical):
 	def func2(self):
 		print("This function is in child 1.")
 
 # Derivied class2
-class Child2(Parent):
+class Child2Hierarchical(ParentHierarchical):
 	def func3(self):
 		print("This function is in child 2.")
 
 
 # Driver's code
-object1 = Child1()
-object2 = Child2()
-object1.func1()
-object1.func2()
-object2.func1()
-object2.func3()
+child1_object = Child1Hierarchical()
+child2_object = Child2Hierarchical()
+child1_object.func1()
+child1_object.func2()
+child2_object.func1()
+child2_object.func3()
 
 
 
@@ -737,9 +744,9 @@ class child_Student1(Student1, School):#multiple inheritence
 
 
 # Driver's code
-object = child_Student1()
-object.func1()
-object.func2()
+child_instance = child_Student1()
+child_instance.func1()
+child_instance.func2()
 
 
 #########################################################ENCAPSULATION IN PYTHON###########################################################################################################################################################################
@@ -761,7 +768,7 @@ class Derived(Base):
 		# Base class
 		Base.__init__(self)
 		print("Calling private member of base class: ")
-		print(self.__c)
+		self.m1()
 
 
 # Driver code
@@ -793,7 +800,7 @@ class Shape(ABC): #here Shape is generalisation
   def perimeter(self):
     """Abstract method to calculate the perimeter of the shape."""
 
-class Rectangle(Shape):
+class RectangleDemo(Shape):
   """Concrete class for rectangles."""
 
   def __init__(self, width, height):
@@ -806,7 +813,7 @@ class Rectangle(Shape):
   def perimeter(self):
     return 2 * (self.width + self.height)
 
-class Circle(Shape):
+class CircleDemo(Shape):
   """Concrete class for circles."""
 
   def __init__(self, radius):
@@ -815,11 +822,11 @@ class Circle(Shape):
   def area(self):
     return math.pi * self.radius ** 2
 
-  def perimeter(self):
+  def perimeters(self):
     return 2 * math.pi * self.radius
 
 # Create a rectangle object.
-rectangle = Rectangle(5, 10)
+rectangle = RectangleDemo(5, 10)
 
 # Calculate the area of the rectangle.
 area_of_rectangle = rectangle.area()
@@ -832,8 +839,8 @@ print(area_of_rectangle)
 #implementaion class for Abstract Base Class 'Shape'
 #note: we have to define abstract methods in subclasses otherwise it also becomes abstract class
 import math
-from abstract_class import Shape # type: ignore
-class Rectangle(Shape):
+from Abstract2 import Shape as ImportedShape  # type: ignore
+class RectangleImported(ImportedShape):
   """Concrete class for rectangles."""
 
   def __init__(self, width, height):
@@ -846,7 +853,7 @@ class Rectangle(Shape):
   def perimeter(self):
     return 2 * (self.width + self.height)
 
-class Circle(Shape):
+class CircleImported(ImportedShape):
   """Concrete class for circles."""
 
   def __init__(self, radius):
@@ -855,7 +862,7 @@ class Circle(Shape):
   def area(self):
     return math.pi * self.radius ** 2
 
-  def perimeter(self):
+  def perimeters(self):
     return 2 * math.pi * self.radius
 
 

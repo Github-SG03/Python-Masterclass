@@ -15,6 +15,20 @@ percentage_obtained_previous=94.6
 #boolean
 is_male=True
 
+def _read_text(prompt, default=""):
+    try:
+        return input(prompt)
+    except EOFError:
+        return default
+
+def _read_int(prompt, default=0, base=10):
+    try:
+        return int(input(prompt), base)
+    except EOFError:
+        return default
+    except ValueError:
+        return default
+
 #print the values
 print(name,roll_number,percentage_obtained,is_male)
 
@@ -27,10 +41,10 @@ print(chr(roll_number))
 print(ord(gender))
 
 #give & print feedback response for Shivam's performance through 'input()' function
-feedback=input("enter your feedback:")
+feedback=_read_text("enter your feedback:")
 print(feedback)
 #using typecasting for feedback number
-feedback_number=int(input("enter your feedback number from 1-10:"))
+feedback_number=_read_int("enter your feedback number from 1-10:")
 print(feedback_number)
 
 #print the student detail in 1 line
@@ -46,7 +60,7 @@ print(name,roll_number,percentage_obtained,is_male,sep="@")
 print("name =", name, sep='#',end='\n')
 
 #object/variable identity
-a = 50  
+a = 50
 b = a  
 print(id(a))  
 print(id(b))  
@@ -69,18 +83,18 @@ print(float(z))
 
 
 #'eval()' function
-a=eval(input("enter any binary number:"))
-b=eval(input("enter any decimal number:"))
+a=_read_int("enter any binary number:", 0, 2)
+b=_read_int("enter any decimal number:")
 print("a+b:",a+b)
 
 
-"""
+print("a+b:",a+b)
+
+
+
 #deleting a variable
 m=23
 del m
-print(m)
-"""
-
 
 ##local & global variable
 #local variable
@@ -96,14 +110,14 @@ add()
 
 #global variable
 x = 101 # Global variable in function  
-def mainFunction():  
+def main_function():  
  global x  
  print(x) # printing a global variable   
  # modifying a global variable  
  x = 'Welcome To Javatpoint'  
  print(x)  
     
-mainFunction()  
+main_function()  
 print(x) 
 
 # A Python program to display that we can store large numbers in Python(it does not have specific datatype to store such large number such as long,short etc)     

@@ -1,15 +1,30 @@
 #################################################FILE HANDLING IN PYTHON######################################################
 ##################################################################################################################################################################################################################################################################################
+from pathlib import Path
+
+DATASET_DIR = Path(__file__).resolve().parent.parent / "datasets"
+SCRIPT_DIR = Path(__file__).resolve().parent
+
+def _dataset_path(*names):
+    for name in names:
+        candidate = DATASET_DIR / name
+        if candidate.exists():
+            return candidate
+    return DATASET_DIR / names[0]
+
+def _script_path(name):
+    return SCRIPT_DIR / name
+
 #Example_1.1:opening the file & check if its is open successfully or not (if it is available in directory)
 #opens the file file.txt in read mode    
-fileptr = open("file_1.txt","r")    
+fileptr = open(_dataset_path("File1.txt"),"r")    
 if fileptr:   
  print("file is opened successfully so as name & fileno of the file is:",fileptr.name,fileptr.fileno)  
  
  
 #Example_1.2:opening the file & check if its is open successfully or not (if it is available in directory then throw boolean 'True' value otherwise 'False' to fileobject) & close it if it open successfully
 # opens the file file.txt in read mode    
-fileptr = open("file_1.txt","r")    
+fileptr = open(_dataset_path("File1.txt"),"r")    
 if fileptr:    
  print("file is opened successfully")    
 #closes the opened file    
@@ -18,7 +33,7 @@ fileptr.close()
  
 #Example_1.3:opening the file & check if its is open successfully or not (if it is available in directory then throw boolean 'True' value otherwise 'False' to fileobject) & do not need to close it if it open successfully as automatically close the file
 #opens the file file.txt in read mode(always open the file using 'with' as it provides the guarantee to close the file regardless of how the nested block exits.)
-with open("file_1.txt",'r') as f:    
+with open(_dataset_path("File1.txt"),'r') as f:    
     content = f.read();    
 print(content) 
 
@@ -46,7 +61,7 @@ fileptr.close()
 
 #Example_1.5
 #open the file_2.txt in read mode. causes error if no such file exists.    
-fileptr = open("file_2.txt","r")  
+fileptr = open(_dataset_path("File2.txt"),"r")  
 #stores all the data upto 10 characters from begining of the file into the variable content    
 content = fileptr.read(10)   
 #prints the type of the data stored in the file    
@@ -60,7 +75,7 @@ fileptr.close()
 #Example_1.6
 #We can read the file using for loop. Consider the following example.
 #open the file.txt in read mode. causes an error if no such file exists.    
-fileptr = open("file_1.txt","r");     
+fileptr = open(_dataset_path("File1.txt"),"r");     
 #running a for loop     
 for i in fileptr:    
  print(i) # i contains each line of the file 
@@ -82,7 +97,7 @@ fileptr.close()
 
 #Exaple_1.8
 #open the file.txt in read mode. causes error if no such file exists.    
-fileptr = open("file_3.txt","r");         
+fileptr = open(_dataset_path("Output.txt", "Output1.txt"),"r");         
 #stores all the data of the file into the variable content    
 content = fileptr.readlines()       
 #prints the content of the file    
@@ -94,10 +109,10 @@ fileptr.close()
 
 #Example_1.9
 #truncate()-It truncates the file to the optional specified size.
-f = open("demofile2.txt", "r+")
+f = open(_dataset_path("DemoFile2.txt"), "r+")
 f.truncate(2)
 #open and read the file after the truncate:
-f = open("demofile2.txt", "r")
+f = open(_dataset_path("DemoFile2.txt"), "r")
 print(f.read())
 f.close()
 
@@ -150,7 +165,7 @@ fileptr.close()
 #Example_3.1
 #File Pointer positions using tell()
 #open the file file2.txt in read mode    
-fileptr = open("file_3.txt","r")    
+fileptr = open(_dataset_path("Output.txt", "Output1.txt"),"r")    
 #initially the filepointer is at 0     
 print("The filepointer is at byte :",fileptr.tell())    
 #reading the content of the file    
@@ -162,7 +177,7 @@ print("After reading, the filepointer is at:",fileptr.tell())
 #Example_3.2
 #Modifying file pointer position using seek()
 #open the file file_2.txt in read mode    
-fileptr = open("file_2.txt","r")    
+fileptr = open(_dataset_path("File2.txt"),"r")    
 #initially the filepointer is at 0     
 print("The filepointer is at byte :",fileptr.tell())    
 #changing the file pointer location to 10.    
@@ -234,7 +249,7 @@ os.rmdir("directory_name")
 #The check_call() method of module subprocess is used to execute a Python script and write the output of that script to a file.
 import subprocess     
 with open("output.txt", "wb") as f:    
-    subprocess.check_call(["python", "output_pythonscript.py"], stdout=f)# here output of  'output_pythonscript' is stored in 'output.txt' when we run this file(file_Handlin.py)
+    subprocess.check_call(["python", str(_script_path("OutputPythonScript.py"))], stdout=f)# here output of  'output_pythonscript' is stored in 'output.txt' when we run this file(file_Handlin.py)
  
 
 #####################################################################################################################################################################################################################################################
@@ -286,7 +301,7 @@ Smith,IT,01-04-2000,October
 
 '''
 import csv    
-with open('Python_FileHandling_Read.csv','r') as csv_file:    
+with open(_dataset_path('PythonFileHandlingRead.csv', 'Python_FileHandling_Read.csv'),'r') as csv_file:    
  csv_reader = csv.reader(csv_file, delimiter=',')    #returns value as [' ',' ',' ',' '] to 'csv_reader' variable
  row_count = 0    
  for row in csv_reader:

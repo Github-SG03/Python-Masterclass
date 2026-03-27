@@ -29,14 +29,25 @@ class TooYoungException(Exception):
 class TooOldException(Exception):
     def __init__(self,msg):
         self.msg=msg
-        
-age= int(input("enter your age"))
-if age>60:
-    raise TooOldException("you are too old to get married")
-elif age<18:
-   raise TooYoungException("you are too young to married")
-else:
-   print("defined not details")
+
+def _read_int(prompt, default=0):
+    try:
+        return int(input(prompt))
+    except EOFError:
+        return default
+    except ValueError:
+        return default
+
+try:
+    age = _read_int("enter your age", 20)
+    if age>60:
+        raise TooOldException("you are too old to get married")
+    elif age<18:
+        raise TooYoungException("you are too young to married")
+    else:
+        print("defined not details")
+except (TooOldException, TooYoungException) as exc:
+    print(exc.msg)
 
 
 
@@ -111,8 +122,8 @@ except ZeroDivisionError:
 
 #Example_1.4:single except block handling multiple exception
 try:
- x=int(input("enter value of x"))
- y=int(input("enter value of y"))
+ x=_read_int("enter value of x")
+ y=_read_int("enter value of y")
  z=x/y
 except(ZeroDivisionError, ValueError) as msg:  # here multiple exception is  forming tuple & any exception occurs it matches its type, bind it with its class & throw its object
  print("the raised exceptions:", msg.__class__)
@@ -122,8 +133,8 @@ except(ZeroDivisionError, ValueError) as msg:  # here multiple exception is  for
 
 #Example_1.5:Default Except block(We use default except block to handle any type of exception & generally used to print exception information to console. It must be defined as last except block otherwise syntax error will occurs)
 try:
-   a=int(input("enter value of a"))
-   b=int(input("enter value of b"))
+   a=_read_int("enter value of a")
+   b=_read_int("enter value of b")
    z=a/b
 except (ZeroDivisionError) as msg:  # here multiple exception is  forming tuple
   print("exception message",msg)

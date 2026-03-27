@@ -1,4 +1,18 @@
 ##############################dictionary in python###############################################
+def _read_text(prompt, default=""):
+    try:
+        return input(prompt)
+    except EOFError:
+        return default
+
+def _read_int(prompt, default=0):
+    try:
+        return int(input(prompt))
+    except EOFError:
+        return default
+    except ValueError:
+        return default
+
 #creating a simple dictionary
 Employee = {"Name": "John", "Age": 29, "salary":25000,"Company":"GOOGLE"}    
 print(type(Employee))    
@@ -67,10 +81,10 @@ print(type(Employee))
 print("printing Employee data .... ")    
 print(Employee)    
 print("Enter the details of the new employee....");    
-Employee["Name"] = input("Name: ");    
-Employee["Age"] = int(input("Age: "));    
-Employee["salary"] = int(input("Salary: "));    
-Employee["Company"] = input("Company:");    
+Employee["Name"] = _read_text("Name: ", "John");    
+Employee["Age"] = _read_int("Age: ", 29);    
+Employee["salary"] = _read_int("Salary: ", 25000);    
+Employee["Company"] = _read_text("Company:", "GOOGLE");    
 print("printing the new data");    
 print(Employee)
 

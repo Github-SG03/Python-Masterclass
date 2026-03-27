@@ -118,8 +118,8 @@ tuple_ = ("Python", "Items")
 print(tuple_)  
 #changing tuple through list way
 x = ("apple", "banana", "cherry")
-y = list(x)
-y[1] = "kiwi"
+y: list[str] = list(x)
+y[0] = "kiwi"
 x = tuple(y)
 print(x)
 
@@ -129,4 +129,5 @@ fruits = ("apple", "banana", "cherry")
 print(green)
 print(yellow)
 print(red)
+
 

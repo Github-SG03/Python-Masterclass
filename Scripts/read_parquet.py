@@ -1,43 +1,34 @@
 ########################################################################################################################################################
+from pathlib import Path
+
 import pandas as pd
 import pyarrow.parquet as pq
 
-# Path to your .parquet file
-file_path = r"C:\Users\Shivam Gupta\OneDrive\Documents\Shivam_Developement\PYTHON\python_tutorial\part-r-00000-1a9822ba-b8fb-4d8e-844a-ea30d0801b9e.gz.parquet"
+REPO_ROOT = Path(__file__).resolve().parents[2]
+PARQUET_CANDIDATES = [
+    REPO_ROOT / "Pyspark-HandsOnDatabricks" / "datasets" / "interim" / "parquet_data" / "part-00000-tid-2648944911255100992-3e6ccd82-fe6f-4eb9-bbe8-867d1481eace-462-1.c000.snappy.parquet",
+    REPO_ROOT / "SnowflakeMasterClass-Udemy" / "datasets" / "sales_items_data.parquet",
+]
 
-try:
-    # Read the whole Parquet file
-    df = pd.read_parquet(file_path, engine="pyarrow")
+file_path = next((path for path in PARQUET_CANDIDATES if path.exists()), None)
 
-    # ✅ Display all rows and columns
-    with pd.option_context('display.max_rows', None, 'display.max_columns', None):
-        print(df)
+if file_path is None:
+    print("No local parquet sample found in the repository.")
+else:
+    try:
+        df = pd.read_parquet(file_path)
 
-    # 🔽 Optionally, export to CSV for easier viewing
-    #output_csv = file_path.replace(".parquet", ".csv")
-    #df.to_csv(output_csv, index=False)
-    #print(f"\n✅ Full data exported to: {output_csv}")
+        with pd.option_context("display.max_rows", None, "display.max_columns", None):
+            print(df)
 
-except Exception as e:
-    print("❌ Error reading Parquet file:")
-    print(e)
-
-
-
-# Load the Parquet file
-parquet_file = pq.ParquetFile(
-    r"C:\Users\Shivam Gupta\OneDrive\Documents\Shivam_Developement\PYTHON\python_tutorial\part-r-00000-1a9822ba-b8fb-4d8e-844a-ea30d0801b9e.gz.parquet"
-)
-
-print("File metadata:")
-print(parquet_file.metadata)
-
-print("\nFirst row group metadata:")
-print(parquet_file.metadata.row_group(0))
-
-print("\nFirst column in first row group:")
-print(parquet_file.metadata.row_group(0).column(0))
-
-print("\nColumn statistics:")
-print(parquet_file.metadata.row_group(0).column(0).statistics)
-
+        parquet_file = pq.ParquetFile(file_path)
+        print("File metadata:")
+        print(parquet_file.metadata)
+        print("First row group metadata:")
+        print(parquet_file.metadata.row_group(0))
+        print("First column in first row group:")
+        print(parquet_file.metadata.row_group(0).column(0))
+        print("Column statistics:")
+        print(parquet_file.metadata.row_group(0).column(0).statistics)
+    except Exception as exc:
+        print(f"Error reading Parquet file: {exc}")

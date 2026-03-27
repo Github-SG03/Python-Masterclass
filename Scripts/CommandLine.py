@@ -1,4 +1,5 @@
 #####################################COMMAND LINE PROGRAMMING IN PYTHON################################################################################
+from pathlib import Path
 
 #Example_1:find the of 'argv'
 from sys import argv
@@ -8,8 +9,8 @@ print(type(argv))
 #Example_2:find the of values of 'argv'
 from sys import argv
 print(argv[0])
-print(argv[1])
-print(argv[2])
+print(argv[1] if len(argv) > 1 else "No first argument provided")
+print(argv[2] if len(argv) > 2 else "No second argument provided")
 
 
 
@@ -51,15 +52,18 @@ print("summation of command line arguments is:",sum)
 #Example_5:Real time application of comman line arguments
 #File_Merger_Application
 #note: for client purpose(real-time scenario) we can use file of their use which can be taken from command line
-f1=open("file_1.txt")             #'argv[1]' instead of "file_1.txt"
-f2=open("file_2.txt")             #'argv[2]' instead of "file_2.txt"
-f3=open("output_1.txt",'w+')      #'argv[3]' instead of "file_3.txt"
-for x in f1:                       
-    f3.write(x)
-for x in f2:
-    f3.write(x)
-f1.close()
-f2.close()
+DATASET_DIR = Path(__file__).resolve().parent.parent / "datasets"
+if len(argv) >= 4:
+    file_1 = DATASET_DIR / "File1.txt"
+    file_2 = DATASET_DIR / "File2.txt"
+    output_file = DATASET_DIR / "output_1.txt"
+    with file_1.open() as f1, file_2.open() as f2, output_file.open("w+") as f3:
+        for x in f1:
+            f3.write(x)
+        for x in f2:
+            f3.write(x)
+else:
+    print("Skipping file merge example because no file arguments were supplied.")
 
 
 

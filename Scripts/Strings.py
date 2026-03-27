@@ -1,7 +1,6 @@
 ########python program for string formating/Practise ################
 print("hello world")# python string are immutable i.e: we can change shivam to shivan by str[5]= 'n' ,we can replaced it by a new string like  str="shivan"
 
-print("hello \world")# here there is no meaning of \w so print as it is
 
 print("hello\nworld")
 
@@ -117,18 +116,18 @@ print(String.isprintable())
 print(String.isidentifier())
 print(String.isascii)
 print(String.isnumeric())
-print(String.index("sim"))
+print(String.index("ruT"))
 print(String.count('e',0,5)) # 1 occurence of 'e' in 'meEruT'
 print(string.find('m',0,5))# 2nd location occurence of 'm' in 'simmi'
 print(string.endswith('i',0,2))
 print(String.startswith('s',0,2))
 print(String.strip())
 print(String.lstrip())
-print(String.ljust("&"))
-print(String.center("$"))
+#print(String.ljust("&"))
+#print(String.center("$"))
 print(String.casefold())
 print(String.encode())
-print(String.removesuffix())
+#print(String.removesuffix())
 print(String.splitlines())
 print(String.expandtabs())
 print(String.translate(string))
@@ -138,7 +137,7 @@ print(String.partition("l"))
 print(String.split("E"))
 print(String.isdecimal())
 print(String.__sizeof__())
-print(String.__doc__())
+#print(String.__doc__())
 
  
 

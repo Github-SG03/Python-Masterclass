@@ -1,12 +1,20 @@
 #############################Python program for is statement################################################
+def _read_int(prompt, default=0):
+    try:
+        return int(input(prompt))
+    except EOFError:
+        return default
+    except ValueError:
+        return default
+
 #if statement(to check one condition)
-num = int(input("enter the number?"))  
+num = _read_int("enter the number?")  
 if num%2 == 0:  
     print("Number is even")  
  
     
 #if-else statement(to check two condition)
-num = int(input("enter the number?"))  
+num = _read_int("enter the number?")  
 if num%2 == 0:  
  print("Number is even...")  
 else:  
@@ -25,9 +33,9 @@ else:
  
  
 # multiple if-ladder(multiple if statement-to check multiple condition)
-a = int(input("Enter a? "))  
-b = int(input("Enter b? ")) 
-c = int(input("Enter c? "))  
+a = _read_int("Enter a? ")  
+b = _read_int("Enter b? ") 
+c = _read_int("Enter c? ")  
 if a>b and a>c:  
  print("a is largest")  
 if b>a and b>c:  
@@ -37,7 +45,7 @@ if c>a and c>b:
  
  
 #if-else ladder(multiple if statement-to check multiple condition)/improved form of multiple if-ladder
-marks = int(input("Enter the marks? "))  
+marks = _read_int("Enter the marks? ")  
 if marks > 85 and marks <= 100:  
   print("Congrats ! you scored grade A ...")  
 elif marks > 60 and marks <= 85:  

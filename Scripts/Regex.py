@@ -104,6 +104,7 @@ for m in matcher:
 
 
 #######################################################2.search()################################################################################################################
+from pathlib import Path
 
 
 
@@ -159,9 +160,15 @@ else:
   
 ###############################################3.match()###############################################################################################################
 
+def _read_text(prompt, default=""):
+    try:
+        return input(prompt)
+    except EOFError:
+        return default
+
 #Example_3.1:
 import re
-s=input("enter pattern to check:")
+s=_read_text("enter pattern to check:")
 m=re.match(s,'abcdefgh')
 if m!=None:
     print("match is available at the beginning of the string:{}".format(s))
@@ -176,7 +183,7 @@ else:
 
 #Example_4.1:
 import re
-s=input("enter pattern to check:")
+s=_read_text("enter pattern to check:")
 m=re.fullmatch(s,'abcdefgh')
 if m!=None:
     print("full string matched")
@@ -198,13 +205,13 @@ for m in matcher:
 ################################################6.sub()#########################################################################################
 #Example_6.1:
 import re
-s=re.sub('\d','$','a7b9k5t9k') #sub(pattern,replacement,target) & returns the string after replacement 
+s=re.sub(r'\d','$','a7b9k5t9k') #sub(pattern,replacement,target) & returns the string after replacement 
 print(s) 
  
 ###############################################7.subn()###################################################################################################################   
 #Example_7.1: it returns the number of replacement in the string
 import re
-s=re.subn('\d','$','a7b9k5t9k') #t=sub(pattern,replacement,target) here it retuns object as 'tuple' having (resultstring,number of replacement) as an tuple value..
+s=re.subn(r'\d','$','a7b9k5t9k') #t=sub(pattern,replacement,target) here it retuns object as 'tuple' having (resultstring,number of replacement) as an tuple value..
 print(s)
 print(type(s)) 
 print("the result string:",s[0]) 
@@ -214,7 +221,7 @@ print("the number of replacement:",s[1])
 ###############################################8.split()#####################################################################################################################
 #Example_8.1: it retuns object as list 
 import re
-l=re.split('\.','www.durgasoftvideos.com') #'[.]' is also same as '\.'  which means dot as a symbol only(anything inside a '[]'bracket is treated as symbol)
+l=re.split(r'\.','www.durgasoftvideos.com') #'[.]' is also same as '\.'  which means dot as a symbol only(anything inside a '[]'bracket is treated as symbol)
 print(l)
 for i in l:
     print(i)
@@ -241,7 +248,7 @@ iv.[a-zA-Z0-9#]*
 ===>[a-k][0369][a-zA-Z0-9#]* is the required Regex
 '''
 import re
-s=input("enter identifier to validate:")
+s=_read_text("enter identifier to validate:")
 m=re.fullmatch('[a-k][0369][a-zA-Z0-9#]*',s)
 if m!= None:
     print(s,":is valid java identifier")
@@ -254,7 +261,7 @@ else:
     
     
 #2.1:WAP to identify valid mobile number
-'''
+r'''
 RULES FOR VALID MOBILE NUMBER
 
 i. the mobile number should be of length 10
@@ -267,8 +274,8 @@ iii.[6789]
 ===>[6789][0-9]{9} or [6-9]\d{9} is the required regex
 '''
 import re
-s=input("enter mobile number to validate:")
-m=re.fullmatch('[6-9]\d{9}',s)
+s=_read_text("enter mobile number to validate:")
+m=re.fullmatch(r'[6-9]\d{9}',s)
 if m!= None:
     print(s,":is valid mobile number")
 else:
@@ -282,7 +289,7 @@ else:
  
     
 #2.2:WAP to identify valid mobile number of 10, 11, 12 or 13 digit
-'''
+r"""
 #RULES FOR VALID MOBILE NUMBER
 
 i. if the length of mobile number is 10 then first digit should be between(6,7,8,9)
@@ -297,30 +304,30 @@ i.[6-9]\d{9}
 ii.0{1}[6-9]\d{9}
 iii.91[6-9]\d{9}
 iv.=91[6-9]\d{9}
-'''
+"""
 import re
-s=input("enter mobile number to validate:")
+s=_read_text("enter mobile number to validate:")
 if len(s)==10:
-  m=re.fullmatch('[6-9]\d{9}',s)
-  if m!= None:
-      print(s,":is valid mobile number")
-  else:
-    print(s,":is not valid mobile number")
+    m=re.fullmatch(r'[6-9]\d{9}',s)
+    if m!= None:
+        print(s,":is valid mobile number")
+    else:
+        print(s,":is not valid mobile number")
            
 elif len(s)==11:
-    m=re.fullmatch('0{1}[6-9]\d{9}',s)
+    m=re.fullmatch(r'0{1}[6-9]\d{9}',s)
     if m!= None:
         print(s,":is valid mobile number")
     else:
         print(s,":is not valid mobile number")
 elif len(s)==12:
-    m=re.fullmatch('91[6-9]\d{9}',s)
+    m=re.fullmatch(r'91[6-9]\d{9}',s)
     if m!= None:
         print(s,":is valid mobile number")
     else:
         print(s,":is not valid mobile number")
 elif len(s)==13:
-    m=re.fullmatch('+91[6-9]\d{9}',s)
+    m=re.fullmatch(r'\+91[6-9]\d{9}',s)
     if m!= None:
         print(s,":is valid mobile number")
     else:
@@ -336,15 +343,18 @@ else:
    
 #3:WAP to read 'input_file.txt' & write all the mobile number from it to 'output_file.txt'
 import re
-f1=open('input_file.txt','r')
-f2=open('output_file.txt','w')
-for line in f1:
-    list=re.findall('[6-9]\d{9}',line)
-    for number in list:
-        f2.write(number+"\n")
-print("extracted all mobile number from 'input_file.txt' & written into 'output_file.txt':")
-f1.close()
-f2.close()
+dataset_dir = Path(__file__).resolve().parent.parent / "datasets"
+input_file = dataset_dir / "Input_file.txt"
+output_file = dataset_dir / "OutputFile.txt"
+if input_file.exists():
+    with input_file.open('r', encoding='utf-8') as f1, output_file.open('w', encoding='utf-8') as f2:
+        for line in f1:
+            list=re.findall(r'[6-9]\d{9}',line)
+            for number in list:
+                f2.write(number+"\n")
+    print("extracted all mobile number from 'Input_file.txt' & written into 'OutputFile.txt':")
+else:
+    print("Skipping file extraction example because the input dataset is missing.")
 
 
 
@@ -355,8 +365,8 @@ f2.close()
 
 #4:WAP to check valid email-id
 import re
-s-input("enter e-mail id:")
-m=re.fullmatch('\w[a-zA-Z0-9_.]*@(gmail|rediffmail)[.][a-z]+',s) # first letter of local name should be either alphanumeric or underscore( so used here '\w')
+s=_read_text("enter e-mail id:")
+m=re.fullmatch(r'\w[a-zA-Z0-9_.]*@(gmail|rediffmail)[.][a-z]+',s) # first letter of local name should be either alphanumeric or underscore( so used here '\w')
 if m!=None:
     print("valid e-mail id")
 else:
@@ -376,12 +386,15 @@ import urllib.request
 sites=['https://www.google.com/','https://www.rediff.com/','https://www.redbus.in/']
 for site in sites:
     print("searching.....",site)
-    u=urllib.request.urlopen(site)
-    text=u.read()
-    #print(text)
-    #print(type(text))
-    title = re.findall("<title>.*</title>", text.decode('utf-8'), re.IGNORECASE)
-    print(title[0])
+    try:
+        u=urllib.request.urlopen(site, timeout=5)
+        text=u.read()
+        #print(text)
+        #print(type(text))
+        title = re.findall("<title>.*</title>", text.decode('utf-8'), re.IGNORECASE)
+        print(title[0])
+    except Exception as exc:
+        print(f"Skipping {site}: {exc}")
  
 
 
@@ -392,9 +405,12 @@ for site in sites:
 #5.2 WAP to read all mobile number from  redbus.in using web scrapping
 import re,urllib
 import urllib.request
-u=urllib.request.urlopen('https://www.redbus.in/')
-text=u.read()
-numbers=re.findall('[0-9]{3,4}[-| ][0-9]{8}',text.decode('utf-8'),re.IGNORECASE)
-for num in numbers:
-    print(num)
+try:
+    u=urllib.request.urlopen('https://www.redbus.in/', timeout=5)
+    text=u.read()
+    numbers=re.findall('[0-9]{3,4}[-| ][0-9]{8}',text.decode('utf-8'),re.IGNORECASE)
+    for num in numbers:
+        print(num)
+except Exception as exc:
+    print(f"Skipping redbus number scraping example: {exc}")
 
