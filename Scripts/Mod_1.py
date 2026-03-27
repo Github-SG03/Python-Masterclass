@@ -1,4 +1,2 @@
-def gfg():
- print("Welcome to GFG")
- 
- 
+def sub(a, b):
+    return a - b

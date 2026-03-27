@@ -1,4 +1,4 @@
-#####################################COMMAND LINE PROGRAMMING IN PYTHON################################################################################
+#################COMMAND LINE PROGRAMMING IN PYTHON#######################################
 from pathlib import Path
 
 #Example_1:find the of 'argv'
@@ -43,7 +43,7 @@ print("\n\nResult for sum:", Sum)                      #print("summation is:",su
 args=argv[1:]
 sum=0
 for x in args:
-    sum=sum+x
+    sum=sum+int(x)
 print("summation of command line arguments is:",sum)
 '''
 

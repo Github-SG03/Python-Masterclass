@@ -34,8 +34,8 @@ print("x is y:",x is y)
 print("x is not y:",x is not y)
 print( [] == [] ) #empty list are same 
 print( [] is [] ) #empty list are need not to be same object(same identity) as (list & dictionary) are stored independently & are mutable
-print( {} == {} )  
-print( {} is {} )
+print( {} == {} )  #empty dictionary are same
+print( {} is {} )  #false as they are mutable and stored independently
 print( () is () )  #true as they are immutable
 
 

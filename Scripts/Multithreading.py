@@ -1,9 +1,6 @@
 #####################################MULTITHREADING_MULTIPROCESSING_IN_PYTHON########################################################
 #####################################MULTITHREADING#############################################################################
 #How to achieve multithreading in Python[To achieve multithreading, we need to import the threading module in Python Program & ways to define thread class as:]
-
-
-
 #Example_1.1:creating thread without using any class
 import threading                                                   #1..executed by main thread [A threading module is made up of a Thread class, which is instantiated to create a Python thread object.]
 def print_hello(n):                                                #2.executed by main thread /5.these is executed by child thread
@@ -18,14 +15,16 @@ for i in range(5):                                                 #6.these is e
 
 
 #Example_1.2:creating thread by extending thraed class
-from threading import Thread                                                                                      #1.executed by main thread 
-class MyThread(Thread):                                                                                      #2.ignored by main thread/#5.executed by child thread 
+from threading import Thread                                   #1.executed by main thread 
+class MyThread(Thread):                                        #2.ignored by main thread/#5.executed by child thread 
     def run(self):#here 'run()' is thread class method [used to define a thread's activity and can be overridden by a class that extends the threads class.]
        print("child thread")
 
-t1=MyThread()                                                                                                 #3.executed by main thread       
-t1.start()#here'start()'is thread class method[to start the execution of thread class activity]               #4.executed by main thread 
-for i in range(10):                                                                                           #6.executed by main thread 
+
+
+t1=MyThread()                                                  #3.executed by main thread       
+t1.start()#here'start()'is thread class method[to start the execution of thread class activity] #4.executed by main thread 
+for i in range(10):                                                                             #6.executed by main thread 
     print("main thread")
 
 
@@ -48,7 +47,7 @@ for i in range(10):                       #7.executed by main thread
 
 
 
-#################################################################################################################################################################################################################################################################################################################################################################################
+######################################################################################################################################################################################################################################################################################
  
 #Synchronizing Threads in Python using 'join()':It is a thread synchronization mechanism that ensures no two threads can simultaneously execute a particular segment inside the program to access the shared resources. The situation may be termed as critical sections. We use a race condition to avoid the critical section condition
 #'join()': this method used in the thread class to halt the main thread's execution and waits till the complete execution of the child thread object. When the thread object is completed, it starts the execution of the main thread in Python.

@@ -1,4 +1,4 @@
-#############################Python program for is statement################################################
+#############################Python program for if- statement##############################
 def _read_int(prompt, default=0):
     try:
         return int(input(prompt))
@@ -25,7 +25,7 @@ else:
 num = 15
 if num >= 0: 
 	if num == 0: #if statemet inside if
-		print("Zero") 
+		print("non-negative & non-positive number") 
 	else: 
 		print("Positive number") 
 else: 

@@ -30,7 +30,7 @@ print(Days1.union(Days2)) #printing the union of the sets using union()
 
 #intersection
 Days1 = {"Monday","Tuesday", "Wednesday", "Thursday"}    
-Days2 = {"Monday","Tuesday","Sunday", "Friday"}    
+Days2 = {"Monday","Tuesday","Sunday", "Friday","Friday"}    
 print(Days1&Days2) #prints the intersection of the two sets using &
 set1 = {"Devansh","John", "David", "Martin"}    
 set2 = {"Steve", "Milan", "David", "Martin"}    
@@ -89,9 +89,16 @@ a.pop()#Remove and return an arbitrary set element that is the last element of t
 print(a)
 a.remove(3)#Remove an element from a set; it must be a member. If the element is not a member, raise a KeyError.
 print(a)
+
+#update() method updates the set with the union of itself and others. It accepts an iterable as an argument.
 a.update((8,9,10))#accepts any iterable as an argument
 print(a)
-
+a.update([1, 1, 1])
+print(a)
+a.update({1:11, 2:22, 3:13})
+print(a)
+a.update({12,12,12,13})
+print(a)
 
 
 

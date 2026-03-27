@@ -1,0 +1,5 @@
+DEBUG:root:Harmless debug Message
+INFO:root:Just an information
+WARNING:root:Its a Warning
+ERROR:root:Did you try to divide by zero
+CRITICAL:root:Internet is down

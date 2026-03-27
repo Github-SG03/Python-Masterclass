@@ -17,7 +17,7 @@ print( None == " " )
 print( None == False )  
 A = None   
 B = None  
-print( A == B )
+print( "A & B  is: ", A == B )
 
 #operator keyword example()
 
