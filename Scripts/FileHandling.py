@@ -337,7 +337,150 @@ print("Writing complete")
  
  
  
- 
+ ############################################################
+# UNIVERSAL DATA READER (CSV, JSON, PARQUET, AVRO)
+# Reads multiple file formats in one script
+############################################################
+
+import pandas as pd
+from pathlib import Path
+import fastavro #type: ignore
+# Optional imports (only needed for some formats)
+try:
+    import pyarrow.parquet as pq
+except:
+    pq = None
+
+try:
+    import fastavro
+except:
+    fastavro = None
+
+
+############################################################
+# 1. FUNCTION: DETECT FILE TYPE & READ
+############################################################
+
+def read_file(file_path):
+    """
+    Reads file based on extension
+    Supported: csv, json, parquet, avro
+    """
+
+    file_path = Path(file_path)
+
+    if not file_path.exists():
+        print("❌ File not found:", file_path)
+        return None
+
+    ext = file_path.suffix.lower()
+
+    print(f"\n📂 Reading file: {file_path}")
+    print(f"📌 Detected type: {ext}")
+
+    try:
+        ####################################################
+        # CSV FILE
+        ####################################################
+        if ext == ".csv":
+            df = pd.read_csv(file_path)
+            return df
+
+        ####################################################
+        # JSON FILE
+        ####################################################
+        elif ext == ".json":
+            df = pd.read_json(file_path)
+            return df
+
+        ####################################################
+        # PARQUET FILE
+        ####################################################
+        elif ext == ".parquet":
+            df = pd.read_parquet(file_path)
+
+            # Show metadata if pyarrow available
+            if pq:
+                parquet_file = pq.ParquetFile(file_path)
+                print("\n📊 Parquet Metadata:")
+                print(parquet_file.metadata)
+
+            return df
+
+        ####################################################
+        # AVRO FILE
+        ####################################################
+        elif ext == ".avro":
+            if not fastavro:
+                print("⚠️ fastavro not installed. Run: pip install fastavro")
+                return None
+
+            with open(file_path, "rb") as f:
+                reader = fastavro.reader(f)
+                records = list(reader)
+
+            df = pd.DataFrame(records)
+            return df
+
+        ####################################################
+        # UNSUPPORTED FILE
+        ####################################################
+        else:
+            print("❌ Unsupported file format")
+            return None
+
+    except Exception as e:
+        print("❌ Error reading file:", e)
+        return None
+
+
+############################################################
+# 2. DISPLAY FUNCTION
+############################################################
+
+def display_data(df):
+    """Display DataFrame with full view"""
+
+    if df is None:
+        return
+
+    print("\n📊 Data Preview:")
+    print(df.head())
+
+    print("\n📐 Shape:", df.shape)
+    print("\n🧾 Columns:", df.columns.tolist())
+
+    print("\n📊 Data Types:")
+    print(df.dtypes)
+
+
+############################################################
+# 3. MAIN EXECUTION
+############################################################
+
+if __name__ == "__main__":
+
+    # 👉 Change this path to your file
+    file_path = input("Enter file path: ").strip()
+
+    df = read_file(file_path)
+
+    display_data(df)
+
+
+############################################################
+# 4. REQUIREMENTS
+############################################################
+
+# pip install pandas
+# pip install pyarrow
+# pip install fastavro
+
+############################################################
+# END NOTE
+############################################################
+
+print("\n🎉 Universal Data Reader Ready!")
 
     
 
